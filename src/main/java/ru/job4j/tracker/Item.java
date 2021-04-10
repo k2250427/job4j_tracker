@@ -4,6 +4,19 @@ public class Item {
     private int id;
     private String name;
 
+    public Item() {
+    }
+
+    public Item(String name) {
+        this.id = 0;
+        this.name = name;
+    }
+
+    public Item(String name, int id) {
+        this.id = id;
+        this.name = name;
+    }
+
     public int getId() {
         return id;
     }
