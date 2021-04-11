@@ -5,7 +5,10 @@ import junit.framework.TestCase;
 import static org.hamcrest.Matchers.closeTo;
 import static org.junit.Assert.assertThat;
 
-public class PointTest extends TestCase {
+import org.junit.Test;
+
+@Test
+public class PointTest {
 
     public void testDistance3d() {
         Point a = new Point(0, 0, 0);
