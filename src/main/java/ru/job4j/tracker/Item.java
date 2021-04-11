@@ -8,7 +8,6 @@ public class Item {
     }
 
     public Item(String name) {
-        this.id = 0;
         this.name = name;
     }
 
