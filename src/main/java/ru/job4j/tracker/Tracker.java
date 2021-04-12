@@ -56,11 +56,18 @@ public class Tracker {
         return rsl;
     }
 
-    // методы для тестирования
-    public void setNull(int index) {
-        this.items[index] = null;
+    public boolean delete(int id) {
+        boolean rsl = false;
+        int index = indexOf(id);
+        if (index != -1) {
+            System.arraycopy(items, index + 1, items, index, size - index);
+            items[size - 1] = null;
+            size--;
+        }
+        return rsl;
     }
 
+    // методы для тестирования
     public void printItems() {
         for (int i = 0; i < this.size; i++) {
             if (this.items[i] != null) {
