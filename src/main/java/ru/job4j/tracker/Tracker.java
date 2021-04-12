@@ -59,7 +59,7 @@ public class Tracker {
         return Arrays.copyOf(temp, newSize);
     }
 
-    public void setNull(int index){
+    public void setNull(int index) {
         this.items[index] = null;
     }
 
@@ -89,7 +89,7 @@ public class Tracker {
         it = new Item("test");
         trac.add(it);
         it = trac.findById(4);
-        if(it != null) {
+        if (it != null) {
             System.out.println(it.getName());
         } else {
             System.out.println("null");
