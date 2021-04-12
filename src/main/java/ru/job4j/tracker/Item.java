@@ -10,13 +10,11 @@ public class Item {
 
     public Item(String name) {
         this.name = name;
-        this.created = LocalDateTime.now();
     }
 
     public Item(String name, int id) {
         this.id = id;
         this.name = name;
-        this.created = LocalDateTime.now();
     }
 
     public int getId() {
