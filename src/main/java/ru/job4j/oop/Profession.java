@@ -6,11 +6,11 @@ public class Profession {
     private String education;
     private String birthday;
 
-    public Profession() {
-        this.name = "";
-        this.surname = "";
-        this.education = "";
-        this.birthday = "";
+    public Profession(String name, String surname, String edu, String birthday) {
+        this.name = name;
+        this.surname = surname;
+        this.education = edu;
+        this.birthday = birthday;
     }
 
     public String getName() {
