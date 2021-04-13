@@ -10,8 +10,13 @@ public class StartUI {
             this.showMenu();
             System.out.print("Select: ");
             int select = Integer.valueOf(scanner.nextLine());
-            if (select != 6) {
-                System.out.println("Пользователь выбрал: " + select);
+            if (select == 0) {
+                System.out.println("=== Create a new Item ====");
+                System.out.print("Enter name: ");
+                String name = scanner.nextLine();
+                Item item = new Item(name);
+                tracker.add(item);
+                System.out.println("Добавленная заявка: " + item);
             } else {
                 run = false;
             }
@@ -29,7 +34,6 @@ public class StartUI {
             System.out.println(i + ". " + menu[i]);
         }
     }
-
 
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
