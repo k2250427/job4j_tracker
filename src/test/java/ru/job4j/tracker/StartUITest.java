@@ -57,6 +57,62 @@ public class StartUITest {
     }
 
     @Test
+    public void whenFindAllItems() {
+        Output out = new StubOutput();
+        Tracker tracker = new Tracker();
+        Item[] list = new Item[3];
+        Item item1 = tracker.add(new Item("New item 1"));
+        Item item2 = tracker.add(new Item("New item 2"));
+        Item item3 = tracker.add(new Item("New item 3"));
+        list[0] = item1;
+        list[1] = item2;
+        list[2] = item3;
+        Input in = new StubInput(
+                new String[] {"0", "1"}
+        );
+        UserAction[] actions = {
+                new FindAllAction(out),
+                new Exit()
+        };
+        new StartUI(out).init(in, tracker, actions);
+        assertArrayEquals(tracker.findAll(), list);
+    }
+
+    @Test
+    public void whenFindByIdItems() {
+        Output out = new StubOutput();
+        Tracker tracker = new Tracker();
+        Item item = tracker.add(new Item("Deleted item"));
+        String id = String.valueOf(item.getId());
+        Input in = new StubInput(
+                new String[] {"0", id, "1"}
+        );
+        UserAction[] actions = {
+                new DeleteAction(out),
+                new Exit()
+        };
+        new StartUI(out).init(in, tracker, actions);
+        assertThat(tracker.findById(item.getId()), is(nullValue()));
+    }
+
+    @Test
+    public void whenFindByNameItems() {
+        Output out = new StubOutput();
+        Tracker tracker = new Tracker();
+        Item item = tracker.add(new Item("Deleted item"));
+        String id = String.valueOf(item.getId());
+        Input in = new StubInput(
+                new String[] {"0", id, "1"}
+        );
+        UserAction[] actions = {
+                new DeleteAction(out),
+                new Exit()
+        };
+        new StartUI(out).init(in, tracker, actions);
+        assertThat(tracker.findById(item.getId()), is(nullValue()));
+    }
+
+    @Test
     public void whenExit() {
         Output out = new StubOutput();
         Input in = new StubInput(
