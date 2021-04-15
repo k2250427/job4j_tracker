@@ -2,14 +2,13 @@ package ru.job4j.ex;
 
 public class FindEl {
     public static int indexOf(String[] value, String key) throws ElementNotFoundException {
-        int rsl = 0;
-        for (String st: value) {
-            if (st.equals(key)) {
-                break;
+        int rsl = -1;
+        for (int i = 0; i < value.length; i++) {
+            if (value[i].equals(key)) {
+                rsl = i;
             }
-            rsl++;
         }
-        if (rsl == value.length) {
+        if (rsl == -1) {
             throw new ElementNotFoundException("Искомый элемент в массиве не найден");
         }
         return rsl;
