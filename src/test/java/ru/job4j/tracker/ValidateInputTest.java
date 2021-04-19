@@ -40,4 +40,19 @@ public class ValidateInputTest {
         int selected = input.askInt("-1");
         assertThat(selected, is(-1));
     }
+
+    @Test
+    public void whenMultipleValidInput() {
+        Output out = new StubOutput();
+        Input in = new StubInput(
+                new String[] {"1", "2", "3"}
+        );
+        ValidateInput input = new ValidateInput(out, in);
+        int selected = input.askInt("1");
+        assertThat(selected, is(1));
+        selected = input.askInt("2");
+        assertThat(selected, is(2));
+        selected = input.askInt("3");
+        assertThat(selected, is(3));
+    }
 }
