@@ -19,7 +19,7 @@ public class SortItemsDescendingTest {
 
         List<Item> list = Arrays.asList(item1, item2, item3, item4);
         Item[] expected = new Item[] {item3, item2, item4, item1};
-        Collections.sort(list, new SortItemsAscending());
+        Collections.sort(list, new SortItemsDescending());
         Item[] sortedList = list.toArray(new Item[4]);
         assertArrayEquals(expected, sortedList);
     }
