@@ -1,9 +1,6 @@
 package ru.job4j.collection;
 
-import java.util.ArrayList;
-import java.util.LinkedHashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 public class Departments {
 
@@ -11,8 +8,10 @@ public class Departments {
         Set<String> tmp = new LinkedHashSet<>();
         for (String value : deps) {
             String start = "";
+            String divider;
             for (String el : value.split("/")) {
-                start += (start.equals("") ? "" : "/") + el;
+                divider = (start.equals("") ? "" : "/");
+                start += divider + el;
                 tmp.add(start);
             }
         }
@@ -20,10 +19,10 @@ public class Departments {
     }
 
     public static void sortAsc(List<String> orgs) {
-
+        Collections.sort(orgs);
     }
 
     public static void sortDesc(List<String> orgs) {
-
+        Collections.sort(orgs, Collections.reverseOrder());
     }
 }
