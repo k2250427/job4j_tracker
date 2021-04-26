@@ -14,16 +14,16 @@ public class DepDescCompTest {
                 "K2/SK1/SSK2",
                 "K2/SK1/SSK1"
         );
-        assertThat(rsl, lessThan(0));
+        assertThat(rsl, greaterThan(0));
     }
 
     @Test
-    public void whenUpDepartmentGoBefore() {
+    public void whenUpDepartmentGoesBefore() {
         int rsl = new DepDescComp().compare(
                 "K2",
                 "K2/SK1"
         );
-        assertThat(rsl, greaterThan(0));
+        assertThat(rsl, lessThan(0));
     }
 
 }
