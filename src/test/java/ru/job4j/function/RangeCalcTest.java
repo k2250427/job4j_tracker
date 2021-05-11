@@ -24,8 +24,8 @@ public class RangeCalcTest {
 
     @Test
     public void whenExponentialFunctionThenExponentialResults() {
-        List<Double> result = RangeCalc.diapason(5, 8, x -> 2 * Math.exp(x) + 5);
-        List<Double> expected = Arrays.asList(301.8263182051532, 811.8575869854702, 2198.266316856917);
+        List<Double> result = RangeCalc.diapason(5, 8, x -> 2 * Math.pow(2, x) + 5);
+        List<Double> expected = Arrays.asList(69D, 133D, 261D);
         assertThat(result, is(expected));
     }
 }
