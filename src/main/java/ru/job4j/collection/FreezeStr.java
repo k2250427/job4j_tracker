@@ -7,7 +7,7 @@ public class FreezeStr {
         HashMap<Character, Integer> leftMap = buildMap(left);
         HashMap<Character, Integer> rightMap = buildMap(right);
         for (Character ch: rightMap.keySet()) {
-            if(leftMap.get(ch) == null || leftMap.get(ch) < leftMap.get(ch)) {
+            if(leftMap.get(ch) == null || leftMap.get(ch) < rightMap.get(ch)) {
                 return false;
             }
         }
