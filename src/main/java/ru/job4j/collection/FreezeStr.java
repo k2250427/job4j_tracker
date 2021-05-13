@@ -5,10 +5,14 @@ import java.util.HashMap;
 public class FreezeStr {
     public static boolean eq(String left, String right) {
         HashMap<Character, Integer> leftMap = buildMap(left);
-        HashMap<Character, Integer> rightMap = buildMap(right);
-        for (Character ch: rightMap.keySet()) {
-            if(leftMap.get(ch) == null || leftMap.get(ch) < rightMap.get(ch)) {
+        char[] rightArray = right.toLowerCase().toCharArray();
+        for (char ch: rightArray) {
+            if(leftMap.get(ch) == null) {
                 return false;
+            } else if (leftMap.get(ch) == 1) {
+                leftMap.remove(ch);
+            } else {
+                leftMap.replace(ch, leftMap.get(ch) - 1);
             }
         }
         return true;
