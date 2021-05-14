@@ -10,7 +10,8 @@ public class UsageToMap {
                 Collectors.toMap(
                         student -> student.getSurname(),
                         student -> student,
-                        (existingValue, newValue) -> existingValue)
-                );
+                        (existingValue, newValue) -> existingValue
+                )
+        );
     }
 }
