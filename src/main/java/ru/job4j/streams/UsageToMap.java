@@ -6,11 +6,11 @@ import java.util.stream.Collectors;
 
 public class UsageToMap {
     public Map<String, Student> ListToMap(List<Student> students){
-        return students.stream().distinct().collect(
+        return students.stream().collect(
                 Collectors.toMap(
                         student -> student.getSurname(),
-                        student -> student
-                )
-        );
+                        student -> student,
+                        (existingValue, newValue) -> existingValue)
+                );
     }
 }
