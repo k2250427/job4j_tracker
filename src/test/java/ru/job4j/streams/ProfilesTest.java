@@ -47,7 +47,6 @@ public class ProfilesTest {
         List<Address> rsl = pf.collect(profiles);
         List<Address> expected = new ArrayList<>();
         expected.add(new Address("Belgorod", "Lesnaya street", 10, 2));
-        expected.add(new Address("Moscow", "Old Square", 1, 1));
         expected.add(new Address("Moscow", "Red Square", 1, 1));
         expected.add(new Address("Pskov", "Staraya street", 3, 13));
         expected.add(new Address("Tomsk", "Lenina street", 5, 3));
