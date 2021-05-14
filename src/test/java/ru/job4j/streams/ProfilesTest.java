@@ -1,5 +1,6 @@
 package ru.job4j.streams;
 
+import org.checkerframework.checker.units.qual.A;
 import org.junit.Test;
 
 import java.util.ArrayList;
@@ -14,11 +15,11 @@ public class ProfilesTest {
     @Test
     public void whenCollectAdresses() {
         List<Profile> profiles = List.of(
-                new Profile("Moscow", "Red Square", 1, 1),
-                new Profile("Tomsk", "Lenina street", 5, 3),
-                new Profile("Belgorod", "Lesnaya street", 10, 2),
-                new Profile("Pskov", "Staraya street", 3, 13),
-                new Profile("Moscow", "Old Square", 1, 1)
+                new Profile(new Address("Moscow", "Red Square", 1, 1)),
+                new Profile(new Address("Tomsk", "Lenina street", 5, 3)),
+                new Profile(new Address("Belgorod", "Lesnaya street", 10, 2)),
+                new Profile(new Address("Pskov", "Staraya street", 3, 13)),
+                new Profile(new Address("Moscow", "Old Square", 1, 1))
         );
         Profiles pf = new Profiles();
         List<Address> rsl = pf.collect(profiles);
@@ -34,13 +35,13 @@ public class ProfilesTest {
     @Test
     public void whenCollectDuplicateAdresses() {
         List<Profile> profiles = List.of(
-                new Profile("Moscow", "Red Square", 1, 1),
-                new Profile("Tomsk", "Lenina street", 5, 3),
-                new Profile("Belgorod", "Lesnaya street", 10, 2),
-                new Profile("Pskov", "Staraya street", 3, 13),
-                new Profile("Moscow", "Red Square", 1, 1),
-                new Profile("Belgorod", "Lesnaya street", 10, 2),
-                new Profile("Moscow", "Old Square", 1, 1)
+                new Profile(new Address("Moscow", "Red Square", 1, 1)),
+                new Profile(new Address("Tomsk", "Lenina street", 5, 3)),
+                new Profile(new Address("Belgorod", "Lesnaya street", 10, 2)),
+                new Profile(new Address("Pskov", "Staraya street", 3, 13)),
+                new Profile(new Address("Moscow", "Red Square", 1, 1)),
+                new Profile(new Address("Belgorod", "Lesnaya street", 10, 2)),
+                new Profile(new Address("Moscow", "Old Square", 1, 1))
         );
         Profiles pf = new Profiles();
         List<Address> rsl = pf.collect(profiles);
