@@ -48,13 +48,21 @@ public class Address implements Comparable<Address> {
         this.apartment = apartment;
     }
 
+//    @Override
+//    public boolean equals(Object o) {
+//        if (this == o) return true;
+//        if (o == null || getClass() != o.getClass()) return false;
+//        Address address = (Address) o;
+//        return Objects.equals(city, address.city) && Objects.equals(street, address.street)
+//                && home == address.home && apartment == address.apartment;
+//    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Address address = (Address) o;
-        return Objects.equals(city, address.city) && Objects.equals(street, address.street)
-                && home == address.home && apartment == address.apartment;
+        return Objects.equals(city, address.city);
     }
 
     @Override

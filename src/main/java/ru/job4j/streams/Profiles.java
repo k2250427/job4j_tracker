@@ -23,9 +23,14 @@ public class Profiles {
                 new Profile(new Address("Belgorod", "Lesnaya street", 10, 2)),
                 new Profile(new Address("Moscow", "Old Square", 1, 1))
         );
+        for (Profile pr: profiles) {
+            System.out.println(pr.getAddress());
+
+        }
+
 
         profiles.stream()
-                .map(profile -> profile.getAddress())
+                //.map(profile -> profile.getAddress())
                 .forEach(System.out::println);
     }
 }

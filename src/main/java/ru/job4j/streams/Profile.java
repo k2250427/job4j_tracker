@@ -3,13 +3,13 @@ package ru.job4j.streams;
 import java.util.Objects;
 
 public class Profile {
-    private static Address address;
+    private Address address;
 
     public Profile(Address addr){
         this.address = addr;
     }
 
-    public static Address getAddress() {
+    public Address getAddress() {
         return address;
     }
 
