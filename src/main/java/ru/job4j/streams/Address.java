@@ -53,7 +53,8 @@ public class Address implements Comparable<Address> {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Address address = (Address) o;
-        return Objects.equals(city, address.city);
+        return Objects.equals(city, address.city) && Objects.equals(street, address.street)
+                && home == address.home && apartment == address.apartment;
     }
 
     @Override
