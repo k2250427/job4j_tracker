@@ -3,7 +3,7 @@ package ru.job4j.streams;
 import java.util.Comparator;
 import java.util.Objects;
 
-public class Tuple implements Comparable<Tuple> {
+public class Tuple {
     private String name;
     private double score;
 
@@ -28,10 +28,5 @@ public class Tuple implements Comparable<Tuple> {
 
     public double getScore() {
         return score;
-    }
-
-    @Override
-    public int compareTo(Tuple o) {
-        return Double.compare(score, o.getScore());
     }
 }
