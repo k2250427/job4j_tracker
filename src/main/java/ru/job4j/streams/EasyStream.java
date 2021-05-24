@@ -8,7 +8,7 @@ import java.util.function.Predicate;
 public class EasyStream {
     private List<Integer> streamData;
 
-    public EasyStream(List<Integer> source) {
+    private EasyStream(List<Integer> source) {
         this.streamData = new ArrayList<>(source);
     }
 
@@ -48,7 +48,7 @@ public class EasyStream {
 
     public List<Integer> collect() {
         try {
-            return this.streamData;
+            return new ArrayList<>(this.streamData);
         } catch (Exception ex) {
             throw new UnsupportedOperationException();
         }
