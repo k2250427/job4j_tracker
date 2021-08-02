@@ -36,7 +36,7 @@ public class EasyStream {
         List<Integer> rsl = new ArrayList<>();
         try {
             for (Integer number: streamData) {
-                if(fun.test(number)) {
+                if (fun.test(number)) {
                     rsl.add(number);
                 }
             }

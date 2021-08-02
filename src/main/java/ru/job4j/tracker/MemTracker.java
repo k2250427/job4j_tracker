@@ -3,9 +3,17 @@ package ru.job4j.tracker;
 import java.util.Arrays;
 import java.util.ArrayList;
 
-public class Tracker {
+public class MemTracker implements Store {
     private final ArrayList<Item> items = new ArrayList<>();
     private int ids = 1;
+
+    public void init() {
+
+    }
+
+    public void close() {
+
+    }
 
     public Item add(Item item) {
         item.setId(ids++);
