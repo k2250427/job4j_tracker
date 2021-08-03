@@ -7,7 +7,7 @@ public class StartUI {
         this.out = out;
     }
 
-    public void init(Input input, Store memTracker, UserAction[] actions) {
+    public void init(Input input, MemTracker memTracker, UserAction[] actions) {
         boolean run = true;
         while (run) {
             this.showMenu(actions);
@@ -31,8 +31,7 @@ public class StartUI {
     public static void main(String[] args) {
         Output output = new ConsoleOutput();
         Input input = new ValidateInput(output, new ConsoleInput());
-        Store memTracker = new SqlTracker();
-        memTracker.init();
+        MemTracker memTracker = new MemTracker();
         UserAction[] actions = {
                 new CreateAction(output),
                 new ReplaceAction(output),

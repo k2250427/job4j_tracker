@@ -4,6 +4,7 @@ import java.io.InputStream;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.Properties;
 
 public class SqlTracker implements Store {
@@ -55,16 +56,54 @@ public class SqlTracker implements Store {
     public boolean replace(int id, Item item) {
         boolean rsl = false;
         try {
-            try (Statement statement = cn.createStatement()) {
-                String sql = String.format("update items set name = '%s' where id = %s;",
-                    item.getName(), id
-                );
-                rsl = (statement.executeUpdate(sql) > 0);
+            try (PreparedStatement statement =
+                         cn.prepareStatement("update items set name = '?' where id = ?;")) {
+                statement.setString(1, item.getName());
+                statement.setInt(2, id);
+                rsl = (statement.executeUpdate() > 0);
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
         return rsl;
+    }
+
+    private List<Item> selectItems(String sql, String name) {
+        List<Item> items = new ArrayList<>();
+        try (PreparedStatement statement =
+                     cn.prepareStatement(sql)) {
+            if (Objects.nonNull(name)) {
+                statement.setString(1, name);
+            }
+            try (ResultSet resultSet = statement.executeQuery()) {
+                while (resultSet.next()) {
+                    items.add(new Item(resultSet.getString("name"),
+                            resultSet.getInt("id"),
+                            resultSet.getTimestamp("created").toLocalDateTime()));
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return items;
+    }
+
+    private Item selectItem(String sql, int id) {
+        Item item = null;
+        try (PreparedStatement statement =
+                     cn.prepareStatement(sql)) {
+            statement.setInt(1, id);
+            try (ResultSet resultSet = statement.executeQuery()) {
+                while (resultSet.next()) {
+                    item = new Item(resultSet.getString("name"),
+                            resultSet.getInt("id"),
+                            resultSet.getTimestamp("created").toLocalDateTime());
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return item;
     }
 
     @Override
@@ -83,54 +122,18 @@ public class SqlTracker implements Store {
         return rsl;
     }
 
-    private List<Item> selectItems(String sql) {
-        List<Item> items = new ArrayList<>();
-        try {
-            try (Statement statement = cn.createStatement()) {
-                statement.executeQuery(sql);
-                var sel = statement.getResultSet();
-                while (sel.next()) {
-                    items.add(new Item(sel.getString("name"),
-                            sel.getInt("id"),
-                            sel.getTimestamp("created").toLocalDateTime()));
-                }
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return items;
-    }
-
-    private Item selectItem(String sql) {
-        Item item = null;
-        try {
-            try (Statement statement = cn.createStatement()) {
-                statement.executeQuery(sql);
-                var sel = statement.getResultSet();
-                while (sel.next()) {
-                    item = new Item(sel.getString("name"),
-                            sel.getInt("id"),
-                            sel.getTimestamp("created").toLocalDateTime());
-                }
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return item;
-    }
-
     @Override
     public List<Item> findAll() {
-        return selectItems("select * from items;");
+        return selectItems("select * from items;", null);
     }
 
     @Override
     public List<Item> findByName(String key) {
-        return selectItems(String.format("select * from items where name = '%s';", key));
+        return selectItems("select * from items where name = '?';", key);
     }
 
     @Override
     public Item findById(int id) {
-        return selectItem(String.format("select * from items where id = %s;", id));
+        return selectItem("select * from items where id = ?;", id);
     }
 }
