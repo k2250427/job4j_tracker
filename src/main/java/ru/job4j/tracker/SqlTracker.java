@@ -11,6 +11,10 @@ public class SqlTracker implements Store {
 
     private Connection cn;
 
+    SqlTracker(Connection connection) {
+        this.cn = connection;
+    }
+
     public void init() {
         try (InputStream in = SqlTracker.class.getClassLoader().getResourceAsStream("app.properties")) {
             Properties config = new Properties();
@@ -57,7 +61,7 @@ public class SqlTracker implements Store {
         boolean rsl = false;
         try {
             try (PreparedStatement statement =
-                         cn.prepareStatement("update items set name = '?' where id = ?;")) {
+                         cn.prepareStatement("update items set name = ? where id = ?;")) {
                 statement.setString(1, item.getName());
                 statement.setInt(2, id);
                 rsl = (statement.executeUpdate() > 0);
@@ -129,7 +133,7 @@ public class SqlTracker implements Store {
 
     @Override
     public List<Item> findByName(String key) {
-        return selectItems("select * from items where name = '?';", key);
+        return selectItems("select * from items where name = ?;", key);
     }
 
     @Override
