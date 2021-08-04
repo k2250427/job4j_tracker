@@ -98,7 +98,7 @@ public class SqlTracker implements Store {
                      cn.prepareStatement(sql)) {
             statement.setInt(1, id);
             try (ResultSet resultSet = statement.executeQuery()) {
-                while (resultSet.next()) {
+                if (resultSet.next()) {
                     item = new Item(resultSet.getString("name"),
                             resultSet.getInt("id"),
                             resultSet.getTimestamp("created").toLocalDateTime());
@@ -114,11 +114,10 @@ public class SqlTracker implements Store {
     public boolean delete(int id) {
         boolean rsl = false;
         try {
-            try (Statement statement = cn.createStatement()) {
-                String sql = String.format("delete from items where id = %s;",
-                        id
-                );
-                rsl = statement.execute(sql);
+            try (PreparedStatement statement =
+                         cn.prepareStatement("delete from items where id = ?;")) {
+                statement.setInt(1, id);
+                rsl = statement.execute();
             }
         } catch (Exception e) {
             e.printStackTrace();
