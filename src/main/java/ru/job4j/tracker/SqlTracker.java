@@ -117,7 +117,7 @@ public class SqlTracker implements Store {
             try (PreparedStatement statement =
                          cn.prepareStatement("delete from items where id = ?;")) {
                 statement.setInt(1, id);
-                rsl = statement.execute();
+                rsl = (statement.executeUpdate() > 0);
             }
         } catch (Exception e) {
             e.printStackTrace();
