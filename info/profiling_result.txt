@@ -1,0 +1,58 @@
+Использование jmap
+===================
+Показывает изменение количество объектов Item после создания/удаления
+
+PS C:\Users\CS\IdeaProjects\job4j_tracker> jmap -histo 13900|findstr "ru.job4j"
+ 444:             1             48  [Lru.job4j.tracker.UserAction;
+ 611:             1             24  ru.job4j.tracker.Item
+ 612:             1             24  ru.job4j.tracker.MemTracker
+ 613:             1             24  ru.job4j.tracker.ValidateInput
+ 755:             1             16  ru.job4j.tracker.ConsoleInput
+ 756:             1             16  ru.job4j.tracker.ConsoleOutput
+ 757:             1             16  ru.job4j.tracker.CreateAction
+ 758:             1             16  ru.job4j.tracker.DeleteAction
+ 759:             1             16  ru.job4j.tracker.Exit
+ 760:             1             16  ru.job4j.tracker.FindAllAction
+ 761:             1             16  ru.job4j.tracker.FindByIdAction
+ 762:             1             16  ru.job4j.tracker.FindByNameAction
+ 763:             1             16  ru.job4j.tracker.ReplaceAction
+ 764:             1             16  ru.job4j.tracker.StartUI
+PS C:\Users\CS\IdeaProjects\job4j_tracker> jmap -histo 13900|findstr "ru.job4j"
+ 455:             1             48  [Lru.job4j.tracker.UserAction;
+ 492:             2             48  ru.job4j.tracker.Item
+ 616:             1             24  ru.job4j.tracker.MemTracker
+ 617:             1             24  ru.job4j.tracker.ValidateInput
+ 761:             1             16  ru.job4j.tracker.ConsoleInput
+ 762:             1             16  ru.job4j.tracker.ConsoleOutput
+ 763:             1             16  ru.job4j.tracker.CreateAction
+ 764:             1             16  ru.job4j.tracker.DeleteAction
+ 765:             1             16  ru.job4j.tracker.Exit
+ 766:             1             16  ru.job4j.tracker.FindAllAction
+ 767:             1             16  ru.job4j.tracker.FindByIdAction
+ 768:             1             16  ru.job4j.tracker.FindByNameAction
+ 769:             1             16  ru.job4j.tracker.ReplaceAction
+ 770:             1             16  ru.job4j.tracker.StartUI
+
+Использование jstat
+===================
+Не показывает никаких изменений.
+Первое измерение сделано после запуска.
+Второе - после создания одного объекта.
+Третье - после создания 10 объектов
+Четветое - после удаления всех объектов
+
+PS C:\Users\CS\IdeaProjects\job4j_tracker> jstat -gc 904 1s 1
+ S0C    S1C    S0U    S1U      EC       EU        OC         OU       MC     MU    CCSC   CCSU   YGC     YGCT    FGC    FGCT    CGC    CGCT     GCT
+ 0,0    0,0    0,0    0,0   20480,0   4096,0   372736,0     0,0      0,0    0,0    0,0    0,0        0    0,000   0      0,000   0      0,000    0,000
+PS C:\Users\CS\IdeaProjects\job4j_tracker> jstat -gc 904 1s 1
+ S0C    S1C    S0U    S1U      EC       EU        OC         OU       MC     MU    CCSC   CCSU   YGC     YGCT    FGC    FGCT    CGC    CGCT     GCT
+ 0,0    0,0    0,0    0,0   20480,0   4096,0   372736,0     0,0      0,0    0,0    0,0    0,0        0    0,000   0      0,000   0      0,000    0,000
+PS C:\Users\CS\IdeaProjects\job4j_tracker> jstat -gc 904 1s 1
+ S0C    S1C    S0U    S1U      EC       EU        OC         OU       MC     MU    CCSC   CCSU   YGC     YGCT    FGC    FGCT    CGC    CGCT     GCT
+ 0,0    0,0    0,0    0,0   20480,0   4096,0   372736,0     0,0      0,0    0,0    0,0    0,0        0    0,000   0      0,000   0      0,000    0,000
+
+Использование jconsole
+======================
+Изменения видны на графике Classes по мере создания/удаления Items.
+Изменения на других графиках не имеют явной завимости с работой программы
+
