@@ -38,6 +38,22 @@ public class SqlTracker implements Store {
     }
 
     @Override
+    public int getSize() {
+        int rsl = 0;
+        try (PreparedStatement statement =
+                     cn.prepareStatement("select count(id) as qty from items;")) {
+            try (ResultSet resultSet = statement.executeQuery()) {
+                if (resultSet.next()) {
+                    rsl = resultSet.getInt("qty");
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return rsl;
+    }
+
+    @Override
     public Item add(Item item) {
         try (PreparedStatement statement =
                      cn.prepareStatement("insert into items(name,created) values (?,?)",
@@ -117,6 +133,20 @@ public class SqlTracker implements Store {
             try (PreparedStatement statement =
                          cn.prepareStatement("delete from items where id = ?;")) {
                 statement.setInt(1, id);
+                rsl = (statement.executeUpdate() > 0);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return rsl;
+    }
+
+    @Override
+    public boolean deleteAll() {
+        boolean rsl = false;
+        try {
+            try (PreparedStatement statement =
+                         cn.prepareStatement("delete from items;")) {
                 rsl = (statement.executeUpdate() > 0);
             }
         } catch (Exception e) {

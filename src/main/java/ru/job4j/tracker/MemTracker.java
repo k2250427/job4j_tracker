@@ -15,6 +15,10 @@ public class MemTracker implements Store {
 
     }
 
+    public int getSize() {
+        return items.size();
+    }
+
     public Item add(Item item) {
         item.setId(ids++);
         items.add(item);
@@ -43,9 +47,9 @@ public class MemTracker implements Store {
 
     public ArrayList<Item> findByName(String key) {
         ArrayList<Item> temp = new ArrayList<>();
-        for (int i = 0; i < items.size(); i++) {
-            if (key.equals(items.get(i).getName())) {
-                temp.add(items.get(i));
+        for (Item item :items) {
+            if (key.equals(item.getName())) {
+                temp.add(item);
             }
         }
         return temp;
@@ -70,5 +74,10 @@ public class MemTracker implements Store {
             rsl = true;
         }
         return rsl;
+    }
+
+    public boolean deleteAll() {
+        items.clear();
+        return true;
     }
 }

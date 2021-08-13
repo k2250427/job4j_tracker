@@ -39,6 +39,8 @@ public class StartUI {
                 new FindAllAction(output),
                 new FindByIdAction(output),
                 new FindByNameAction(output),
+                new GenerateAction(output),
+                new ClearAction(output),
                 new Exit()
                 /* another actions */
         };
